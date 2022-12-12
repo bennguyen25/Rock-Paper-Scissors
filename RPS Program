@@ -1,0 +1,70 @@
+import java.util.*;
+import java.util.Scanner;
+public class FinalPractice {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int tieCounter = 0;
+        int winCounter = 0;
+        int lossCounter = 0;
+        System.out.print("Hello what is your name? ");
+        userIntro(input);
+        rockPaperScissors(input, tieCounter, winCounter, lossCounter);
+    }
+    public static void userIntro (Scanner input) {
+        String name = input.next();
+        System.out.print("Hello " + name + ", would you like to play" +
+                " rock paper scissors? ");
+    }
+    public static void rockPaperScissors(Scanner input, int tieCounter, int winCounter, int lossCounter) {
+        String userAnswer = input.next();
+        if (userAnswer.equals("yes") || userAnswer.equals("y")) {
+            game(input, tieCounter, winCounter, lossCounter);
+        }
+    }
+    public static void game(Scanner input, int tieCounter, int winCounter, int lossCounter) {
+        System.out.print("Please enter either rock, paper, scissors, or quit if you are done ");
+        String userResponse = input.next();
+        String[] computerResponses = {"rock", "paper", "scissors"};
+        Random rand = new Random();
+        int randInt = rand.nextInt(2);
+        String compAnswer = computerResponses[randInt];
+        System.out.println("The computer chose: " + compAnswer);
+        if (userResponse.equals("rock") && compAnswer.equals("rock")) {
+            System.out.println("It was a tie!");
+            tieCounter++;
+        } else if (userResponse.equals("rock") && compAnswer.equals("scissors")) {
+            System.out.println("You lost!");
+            lossCounter++;
+        } else if (userResponse.equals("rock") && compAnswer.equals("paper")) {
+            System.out.println("You won!");
+            winCounter++;
+        } else if (userResponse.equals("paper") && compAnswer.equals("scissors")) {
+            System.out.println("You lost!");
+            lossCounter++;
+        } else if (userResponse.equals("paper") && compAnswer.equals("rock")) {
+            System.out.println("You won!");
+            winCounter++;
+        } else if (userResponse.equals("paper") && compAnswer.equals("paper")) {
+            System.out.println("It was a tie!");
+            tieCounter++;
+        } else if (userResponse.equals("scissors") && compAnswer.equals("paper")) {
+            System.out.println("You won!");
+            winCounter++;
+        } else if (userResponse.equals("scissors") && compAnswer.equals("scissors")) {
+            System.out.println("It was a tie!");
+            tieCounter++;
+        } else if (userResponse.equals("scissors") && compAnswer.equals("rock")) {
+            System.out.println("You lost!");
+            lossCounter++;
+        } else if (userResponse.equals("quit")) {
+            summaryStats(tieCounter, winCounter, lossCounter);
+        }
+        game(input, tieCounter, winCounter, lossCounter);
+    }
+    public static void summaryStats (int tieCounter, int winCounter, int lossCounter) {
+
+        System.out.println("You won " + winCounter + " times!");
+        System.out.println("You had a tie " + tieCounter + " times!");
+        System.out.println("You lost " + lossCounter + " times!");
+    }
+}
